@@ -1,0 +1,36 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:vm="using:RegexAnalyzer.ViewModels"
+             x:Class="RegexAnalyzer.Pages.RegexAnalyzer">
+    
+    <Design.DataContext>
+		<vm:RegexAnalyzerViewModel/>
+	</Design.DataContext>
+
+	<StackPanel>
+		<TextBlock Text="Sintaxe Para Analise"
+          Margin="20,20,20,0" />
+		<TextBox Text="{Binding RegexAnalyzer.RegexSyntax}"
+				Watermark="Insira a Sintaxe"
+				Margin="20,10,20,20"
+				Height="100" />
+		<Button Content="Analizar" Margin="80 0 20 0 " Command="{Binding RegexAnalyzer.SyntaxAnalyzer}"/>
+
+		<TreeDataGrid Source="{Binding RegexAnalyzer.Source}"
+				  Height="350"
+				  CanUserSortColumns="False"
+				  Margin="10 10 10 10">
+
+			<TreeDataGrid.Styles>
+				<Style Selector="TreeDataGridRow">
+					<Setter Property="Focusable" Value="False" />
+					<Setter Property="Height" Value="37.5" />
+				</Style>
+			</TreeDataGrid.Styles>
+		
+		</TreeDataGrid>
+	</StackPanel>
+</UserControl>

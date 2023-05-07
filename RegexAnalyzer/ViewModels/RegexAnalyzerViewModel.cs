@@ -18,20 +18,21 @@ namespace RegexAnalyzer.ViewModels
     {
 
         private string? _regexSyntax;
-        private string? _regexOutput;
         public ObservableCollection<RegSyntax> _syntaxList = new ObservableCollection<RegSyntax>();
         private char[] arithmath = new char[] { '+', '-', '/', '*'};
-        private int[] _ef = new int[] { 0, 0, 0, 0, 1, 0, 0, 1, 0 };
+        private int[] _ef = new int[] { 0, 0, 0, 0, 1, 0, 0, 1, 0, 0};
         private int[,] _stateMachine = new int[,] { 
-           // A   B   C   D   E
-            { 1, -1, -1, -1, -1 }, //E0
-            { -1, 2, -1, -1, -1 }, //E1
-            { 3, -1, -1, -1, -1 }, //E2
-            { -1, -1, 4, 5, -1 }, //E3
-            { 6, -1, -1, -1, -1 }, //E4*
-            { -1, -1, -1, -1, 7 }, //E5
-            { -1, -1, -1, -1, 7 }, //E6*
-            { -1, -1, -1, -1, -1 }, //E7
+            // A B C D E
+            {1, -1, 4, 6, -1}, //E0
+            {-1, 2, -1, -1, -1}, //E1
+            {3, -1, -1, -1, -1}, //E2
+            {-1, 0, -1, -1, -1}, //E3
+            {-1, -1, 5, 8, -1}, //E4
+            {-1, -1, -1, 6, -1}, //E5
+            {-1, -1, -1, -1, 7}, //E6
+            {-1, -1, -1, 8, -1}, //E7
+            {-1, -1, -1, -1, 9}, //E8
+            {-1, -1, -1, 6, -1} //E9
         }; // Tabela de transição para a linguagem L
 
         public FlatTreeDataGridSource<RegSyntax> Source { get; } //This allow View to retrive info from Source

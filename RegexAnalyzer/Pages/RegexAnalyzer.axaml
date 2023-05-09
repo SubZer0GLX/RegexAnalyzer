@@ -17,7 +17,7 @@
 				Watermark="Insira a Sintaxe"
 				Margin="20,10,20,20"
 				Height="100" />
-		<Button Content="Analizar" Margin="80 0 20 0 " Command="{Binding RegexAnalyzer.SyntaxAnalyzer}"/>
+		<Button Content="Analizar" Margin="20 0 20 0 " Command="{Binding RegexAnalyzer.SyntaxAnalyzer}"/>
 
 		<TreeDataGrid Source="{Binding RegexAnalyzer.Source}"
 				  Height="350"

@@ -68,7 +68,7 @@ namespace RegexAnalyzer.ViewModels
         }
         public void SyntaxAnalyzer()
         {
-
+            _syntaxList.Clear();
             try
             {
                 int currentIndex = 0;
@@ -77,7 +77,7 @@ namespace RegexAnalyzer.ViewModels
                 string currentSyntax = "";
                 bool invalidSyntax = false;
                 bool invalidSymbol = false;
-                while (currentIndex < _regexSyntax.Length)
+                while (currentIndex != _regexSyntax.Length)
                 {
                     int column;
                     if (symbol == 'a')
@@ -111,14 +111,15 @@ namespace RegexAnalyzer.ViewModels
                         {
                             if (invalidSyntax || invalidSymbol)
                             {
-                                if (invalidSyntax)
+                                if (invalidSymbol)
                                 {
-                                    RegSyntax syntax = new RegSyntax(currentSyntax, "ERRO – Sentença Inválida");
+                                    
+                                    RegSyntax syntax = new RegSyntax(currentSyntax, "ERRO – Símbolo(s) Inválido(s):");
                                     _syntaxList.Add(syntax);
                                 }
                                 else
                                 {
-                                    RegSyntax syntax = new RegSyntax(currentSyntax, "ERRO – Símbolo(s) Inválido(s):");
+                                    RegSyntax syntax = new RegSyntax(currentSyntax, "ERRO – Sentença Inválida");
                                     _syntaxList.Add(syntax);
                                 }
                                 currentSyntax = "";
@@ -167,6 +168,7 @@ namespace RegexAnalyzer.ViewModels
                                 invalidSyntax = true;
                             }
                         }
+                        state = 0;
                     }
                     else
                     {
@@ -195,8 +197,11 @@ namespace RegexAnalyzer.ViewModels
                             }
                             else
                             {
-                                RegSyntax syntax = new RegSyntax(currentSyntax, "ERRO – Sentença Inválida.");
-                                _syntaxList.Add(syntax);
+                                if (!char.IsWhiteSpace(symbol))
+                                {
+                                    RegSyntax syntax = new RegSyntax(currentSyntax, "ERRO – Sentença Inválida.");
+                                    _syntaxList.Add(syntax);
+                                }
                             }
                         }
                         else if (_ef[state] == 1 & !invalidSyntax & !invalidSymbol)
@@ -213,8 +218,12 @@ namespace RegexAnalyzer.ViewModels
                             }
                             else
                             {
-                                RegSyntax syntax = new RegSyntax(currentSyntax, "ERRO – Sentença Inválida.");
-                                _syntaxList.Add(syntax);
+                                if (!char.IsWhiteSpace(symbol))
+                                {
+
+                                    RegSyntax syntax = new RegSyntax(currentSyntax, "ERRO – Sentença Inválida.");
+                                    _syntaxList.Add(syntax);
+                                }
                             }
                         }
                         currentIndex++;
